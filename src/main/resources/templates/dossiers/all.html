@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr"
+      th:replace="~{fragments/all.html :: all(~{ :: table})}">
+    <table th:remove="tag">
+      <thead>
+      <tr>
+        <th>Année</th>
+        <th>Candidat</th>
+        <th style="text-align: center">Projet</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="dossier : ${elements}">
+        <td th:text="${dossier.annee}"></td>
+        <td th:text="${dossier.candidat.nom}"></td>
+        <td style="width: 100%; text-align: center" th:text="${dossier.projet.nom}"></td>
+        <td th:replace="~{fragments/all.html :: actions(${dossier.id})}"></td>
+      </tr>
+      </tbody>
+    </table>
+</html>

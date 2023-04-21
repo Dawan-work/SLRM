@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr"
+      th:fragment="all(table)"
+      th:replace="~{fragments/general.html :: htmlcontent(${#strings.concat(path, ' All')},~{ :: .body-content})}">
+<section class="body-content" th:remove="tag">
+  <div class="table-wrapper">
+    <table>
+      <tbody th:replace="${table}">
+      <tr>
+        <td th:fragment="actions(id)" style="display: flex; gap: 5px; justify-content: end">
+          <a th:href="${#strings.concat('/',path,'/',id)}" class="button primary">Editer</a>
+          <a th:href="${#strings.concat('/',path,'/remove/',id)}" class="button primary">Supprimer</a>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td><a th:href="${#strings.concat('/',path,'/0')}" class="button primary">Nouveau</a></td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>
+</html>

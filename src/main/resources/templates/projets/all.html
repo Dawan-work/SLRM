@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr"
+      th:replace="~{fragments/all.html :: all(~{ :: table})}">
+    <table th:remove="tag">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Nb. Contenus</th>
+        <th>Nb. Competences</th>
+        <th>Nb. Participants</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="projet : ${elements}">
+        <td th:text="${projet.nom}"></td>
+        <td th:text="${#lists.size(projet.contenus)}"></td>
+        <td th:text="${#lists.size(projet.competences)}"></td>
+        <td th:text="${#lists.size(projet.participants)}"></td>
+        <td th:replace="~{fragments/all.html :: actions(${projet.id})}"></td>
+      </tr>
+      </tbody>
+    </table>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr"
+      th:replace="~{fragments/byId.html :: byId(~{ :: form})}">
+<form th:remove="tag">
+    <div class="col-12">
+        <label for="nom">Nom du projet :</label>
+        <input th:errorclass="invalid" type="text" id="nom" th:field="*{nom}" placeholder="SLRM" required/>
+    </div>
+    <div th:remove="tag" th:if="*{id} != 0">
+        <div class="col-6 col-12-xsmall">
+            <label>Compétences :</label>
+            <ul style="max-height: 10vh; overflow: auto">
+                <li class="row" style="list-style-type: none; border-bottom: 1px gray solid; align-items: center" th:each="comp : ${comps}">
+                    <input style="appearance: auto; -moz-appearance: auto; opacity: 1; margin: 0; vertical-align: middle; height: 0.9em;" type="checkbox" th:id="${{comp}}" th:value="${{comp}}" th:field="*{competences}"/>
+                    <label style="margin: 0" th:for="${{comp}}" th:text="${comp.nom}"></label>
+                </li>
+            </ul>
+        </div>
+        <!-- Break -->
+        <div class="col-6 col-12-xsmall">
+            <label>Paricipants :</label>
+            <ul style="max-height: 10vh; overflow: auto">
+                <li class="row" style="list-style-type: none; border-bottom: 1px gray solid; align-items: center" th:each="student : ${students}">
+                    <input style="appearance: auto; -moz-appearance: auto; opacity: 1; margin: 0; vertical-align: middle; height: 0.9em;" type="checkbox" th:id="${{student}}" th:value="${{student}}" th:field="*{participants}"/>
+                    <label style="margin: 0" th:for="${{student}}" th:text="${student.nom}"></label>
+                </li>
+            </ul>
+        </div>
+        <div class="col-12">
+            <label>Contenus :</label>
+            <div th:each="content, stats : *{contenus}" style="position: relative">
+                <a th:href="${#strings.concat('/',path,'/removeContent/',element.id,'/',stats.index)}" class="button small primary" style="position: absolute; right: 0; padding: 0; aspect-ratio: 1">X</a>
+                <textarea style="margin-bottom: 1em" name="resume" id="resume" placeholder="Enter your message" rows="6" th:field="*{contenus[__${stats.index}__]}"></textarea>
+            </div>
+            <a th:href="${#strings.concat('/',path,'/addContent/',element.id)}" class="button small primary" style="float: right">Ajouter</a>
+        </div>
+    </div>
+</form>
+</html>

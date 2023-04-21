@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr"
+      th:replace="~{fragments/all.html :: all(~{ :: table})}">
+    <table th:remove="tag">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="element : ${elements}">
+        <td th:text="${element.nom}"></td>
+        <td th:text="${element.prenom}"></td>
+        <td th:replace="~{fragments/all.html :: actions(${element.id})}"></td>
+      </tr>
+      </tbody>
+    </table>
+</html>

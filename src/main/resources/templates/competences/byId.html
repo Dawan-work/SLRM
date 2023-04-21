@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr"
+      th:replace="~{fragments/byId.html :: byId(~{ :: form})}">
+<form th:remove="tag">
+    <!-- Break -->
+    <div class="col-12">
+        <label for="nom">Nom de Compétence :</label>
+        <input type="text" name="nom" id="nom" placeholder="Conception de templates Thymeleaf" th:field="*{nom}"/>
+    </div>
+</form>
+</html>
