@@ -79,13 +79,7 @@ public abstract class AbstractCrudController<Entity extends BaseEntity,
     }
 
     @ModelAttribute("paths")
-    public List<String> getPaths() {
-        return Arrays.stream(Constants.class.getDeclaredFields()).map(field -> {
-            try {
-                return (String)field.get(null);
-            } catch (Exception e) {
-                return null;
-            }
-        }).filter(Objects::nonNull).toList();
+    public static List<String> getPaths() {
+        return GlobalController.getPaths();
     }
 }

@@ -1,6 +1,5 @@
 package dwn.slrm.business.dossiers;
 
-import dwn.slrm.business.annexes.AnnexeDto;
 import dwn.slrm.business.etudiants.EtudiantDto;
 import dwn.slrm.business.projets.ProjetDto;
 import dwn.slrm.business.resumes.ResumeDto;
@@ -23,5 +22,4 @@ public class DossierProjetDto  implements Serializable {
         EtudiantDto candidat;
         ProjetDto projet;
         List<ResumeDto> resumes;
-        List<AnnexeDto> annexes;
 }

@@ -1,6 +1,5 @@
 package dwn.slrm.business.projets;
 
-import dwn.slrm.business.annexes.AnnexeDto;
 import dwn.slrm.business.competences.CompetenceDto;
 import dwn.slrm.business.etudiants.EtudiantDto;
 import lombok.*;
