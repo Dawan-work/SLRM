@@ -1,10 +1,12 @@
 package dwn.slrm.generic.controllers;
 
+import dwn.slrm.business.annexes.files.FileStorageService;
 import dwn.slrm.generic.Constants;
-import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,9 +16,23 @@ import java.util.Objects;
 @ControllerAdvice
 @RequestMapping
 public class GlobalController {
+
+    private final FileStorageService service;
+
+    public GlobalController(FileStorageService service) {
+        this.service = service;
+    }
+
     @GetMapping
     public String index() {
         return "index";
+    }
+    @GetMapping("/files/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+        Resource file = service.load(filename);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
     @ModelAttribute("paths")
     public static List<String> getPaths() {

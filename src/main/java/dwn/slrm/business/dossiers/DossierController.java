@@ -3,6 +3,7 @@ package dwn.slrm.business.dossiers;
 import dwn.slrm.business.projets.ProjetService;
 import dwn.slrm.business.etudiants.EtudiantService;
 import dwn.slrm.generic.Constants;
+import dwn.slrm.generic.controllers.AbstractAnnexableController;
 import dwn.slrm.generic.controllers.AbstractCrudController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(Constants.DOSSIERS_PATH)
-public class DossierController extends AbstractCrudController<DossierProjet,DossierProjetDto, DossierRepository,DossierMapper,DossierService> {
+public class DossierController extends AbstractAnnexableController<DossierProjet,DossierProjetDto, DossierRepository,DossierMapper,DossierService> {
     private final EtudiantService etudiantService;
     private final ProjetService projetService;
     public DossierController(DossierService service, EtudiantService etudiantService, ProjetService projetService) {

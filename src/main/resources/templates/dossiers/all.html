@@ -6,14 +6,16 @@
       <tr>
         <th>Année</th>
         <th>Candidat</th>
-        <th style="text-align: center">Projet</th>
+        <th>Projet</th>
+        <th>Annexes</th>
       </tr>
       </thead>
       <tbody>
       <tr th:each="dossier : ${elements}">
         <td th:text="${dossier.annee}"></td>
         <td th:text="${dossier.candidat.nom}"></td>
-        <td style="width: 100%; text-align: center" th:text="${dossier.projet.nom}"></td>
+        <td th:text="${dossier.projet.nom}"></td>
+        <td th:text="${#lists.size(dossier.annexes)}"></td>
         <td th:replace="~{fragments/all.html :: actions(${dossier.id})}"></td>
       </tr>
       </tbody>

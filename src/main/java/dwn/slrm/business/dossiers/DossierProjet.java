@@ -1,5 +1,7 @@
 package dwn.slrm.business.dossiers;
 
+import dwn.slrm.business.annexes.Annexe;
+import dwn.slrm.generic.models.Annexable;
 import dwn.slrm.generic.models.BaseEntity;
 import dwn.slrm.business.etudiants.Etudiant;
 import dwn.slrm.business.projets.Projet;
@@ -16,7 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DossierProjet extends BaseEntity {
+public class DossierProjet extends Annexable {
     private String annee;
     @ManyToOne
     private Etudiant candidat;

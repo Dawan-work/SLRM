@@ -16,5 +16,9 @@
       </div>
     </div>
   </form>
+  <!-- Break -->
+  <div th:if="${element.annexes}" class="col-12">
+    <div th:replace="~{fragments/annexes.html :: annexes(${element})}"></div>
+  </div>
 </section>
 </html>

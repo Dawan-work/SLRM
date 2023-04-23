@@ -1,8 +1,8 @@
 package dwn.slrm.business.dossiers;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import dwn.slrm.generic.repositories.AnnexableRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DossierRepository extends JpaRepository<DossierProjet,Long> {
+public interface DossierRepository extends AnnexableRepository<DossierProjet,Long> {
 }

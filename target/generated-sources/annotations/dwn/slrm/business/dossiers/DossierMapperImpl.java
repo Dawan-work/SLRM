@@ -1,5 +1,7 @@
 package dwn.slrm.business.dossiers;
 
+import dwn.slrm.business.annexes.Annexe;
+import dwn.slrm.business.annexes.AnnexeDto;
 import dwn.slrm.business.competences.Competence;
 import dwn.slrm.business.competences.CompetenceDto;
 import dwn.slrm.business.etudiants.Etudiant;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-21T15:34:05+0200",
+    date = "2023-04-21T17:23:03+0200",
     comments = "version: 1.5.4.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -36,6 +38,7 @@ public class DossierMapperImpl implements DossierMapper {
         dossierProjetDto.setCandidat( etudiantToEtudiantDto( entity.getCandidat() ) );
         dossierProjetDto.setProjet( projetToProjetDto( entity.getProjet() ) );
         dossierProjetDto.setResumes( resumeListToResumeDtoList( entity.getResumes() ) );
+        dossierProjetDto.setAnnexes( annexeListToAnnexeDtoList( entity.getAnnexes() ) );
 
         return dossierProjetDto;
     }
@@ -54,6 +57,7 @@ public class DossierMapperImpl implements DossierMapper {
         if ( dto.getVersion() != null ) {
             dossierProjet.setVersion( dto.getVersion() );
         }
+        dossierProjet.setAnnexes( annexeDtoListToAnnexeList( dto.getAnnexes() ) );
         dossierProjet.setAnnee( dto.getAnnee() );
         dossierProjet.setCandidat( etudiantDtoToEtudiant( dto.getCandidat() ) );
         dossierProjet.setProjet( projetDtoToProjet( dto.getProjet() ) );
@@ -195,6 +199,67 @@ public class DossierMapperImpl implements DossierMapper {
         List<ResumeDto> list1 = new ArrayList<ResumeDto>( list.size() );
         for ( Resume resume : list ) {
             list1.add( resumeToResumeDto( resume ) );
+        }
+
+        return list1;
+    }
+
+    protected AnnexeDto annexeToAnnexeDto(Annexe annexe) {
+        if ( annexe == null ) {
+            return null;
+        }
+
+        long id = 0L;
+        String name = null;
+        String extension = null;
+        String type = null;
+
+        id = annexe.getId();
+        name = annexe.getName();
+        extension = annexe.getExtension();
+        type = annexe.getType();
+
+        AnnexeDto annexeDto = new AnnexeDto( id, name, extension, type );
+
+        return annexeDto;
+    }
+
+    protected List<AnnexeDto> annexeListToAnnexeDtoList(List<Annexe> list) {
+        if ( list == null ) {
+            return new ArrayList<AnnexeDto>();
+        }
+
+        List<AnnexeDto> list1 = new ArrayList<AnnexeDto>( list.size() );
+        for ( Annexe annexe : list ) {
+            list1.add( annexeToAnnexeDto( annexe ) );
+        }
+
+        return list1;
+    }
+
+    protected Annexe annexeDtoToAnnexe(AnnexeDto annexeDto) {
+        if ( annexeDto == null ) {
+            return null;
+        }
+
+        Annexe annexe = new Annexe();
+
+        annexe.setId( annexeDto.id() );
+        annexe.setName( annexeDto.name() );
+        annexe.setExtension( annexeDto.extension() );
+        annexe.setType( annexeDto.type() );
+
+        return annexe;
+    }
+
+    protected List<Annexe> annexeDtoListToAnnexeList(List<AnnexeDto> list) {
+        if ( list == null ) {
+            return new ArrayList<Annexe>();
+        }
+
+        List<Annexe> list1 = new ArrayList<Annexe>( list.size() );
+        for ( AnnexeDto annexeDto : list ) {
+            list1.add( annexeDtoToAnnexe( annexeDto ) );
         }
 
         return list1;
