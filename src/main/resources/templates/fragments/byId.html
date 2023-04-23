@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fr"
-      th:fragment="byId(form)"
+      th:fragment="byId(form,annexable)"
       th:replace="~{fragments/general.html :: htmlcontent(${#strings.concat(path, ' ById')},~{ :: .body-content})}">
 <section class="body-content" th:remove="tag">
   <form method="post" th:action="${#strings.concat('/',path)}" th:object="${element}">
@@ -17,7 +17,7 @@
     </div>
   </form>
   <!-- Break -->
-  <div th:if="${element.annexes}" class="col-12">
+  <div th:if="${annexable}" class="col-12">
     <div th:replace="~{fragments/annexes.html :: annexes(${element})}"></div>
   </div>
 </section>
